@@ -77,7 +77,7 @@ var pTimer = {
     }
 
     updateProgressBar();
-    setButtonText('start');
+    updateButtonText();
   },
 };
 
@@ -108,7 +108,17 @@ function setTimerText(min, sec) {
     .innerText = timeNumToString(sec);
 }
 
-function setButtonText(text) {
+function updateButtonText() {
+  var text = '';
+
+  if (!pTimer.interval) {
+    text += 'start ';
+  } else {
+    text += 'reset ';
+  }
+
+  text += pTimer.mode.split('_').join(' ');
+
   document.getElementById('pomodoro-button')
     .innerText = text;
 }
@@ -116,12 +126,11 @@ function setButtonText(text) {
 function onButtonPress() {
   if (!pTimer.interval) {
     pTimer.set().start();
-    setButtonText('reset');
   } else {
     pTimer.stop().reset();
-    setButtonText('start');
   }
 
+  updateButtonText();
   console.log(pTimer.mode);
 }
 
