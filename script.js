@@ -131,7 +131,6 @@ function onButtonPress() {
   }
 
   updateButtonText();
-  console.log(pTimer.mode);
 }
 
 document.getElementById('pomodoro-button')
