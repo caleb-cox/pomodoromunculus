@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body, #pomodoro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+#pomodoro {
+  background: tomato;
+  width: 256px;
+  height: 256px;
+  flex-direction: column;
+  border-radius: 16px;
+}
+
+#pomodoro-timer {
+  background: white;
+  font-family: monospace;
+  font-size: 48px;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+#pomodoro-button {
+
+}
