@@ -23,9 +23,12 @@ html, body {
   border-radius: 16px;
 }
 
+#pomodoro > * {
+  width: 192px;
+}
+
 #pomodoro-progress {
   flex-direction: row;
-  width: 192px;
 }
 
 .progress-cell {
@@ -33,18 +36,17 @@ html, body {
   height: 8px;
   width: 48px;
   border-radius: 2px;
-  box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 2px #000;
 }
 
 .progress-cell.filled {
   background-color: #252621;
-  box-shadow: inset 0 0 1px #EBF2CC;
+  box-shadow: inset 0 0 2px #EBF2CC;
 }
 
 #pomodoro-timer {
   background-color: #EBF2CC;
   color: #252621;
-  width: 192px;
   font-size: 48px;
   font-family: monospace;
   text-align: center;
@@ -58,9 +60,9 @@ html, body {
 #pomodoro-button {
   background-color: #BB2509;
   color: #EEE;
-  width: 192px;
-  font-size: 16px;
-  font-family: monospace;
+  font-size: 12px;
+  font-family: sans-serif;
+  letter-spacing: 2px;
   padding: 8px;
   border: 0;
   border-radius: 4px;
