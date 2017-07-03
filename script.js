@@ -1,14 +1,14 @@
 var POMODORO = 'POMODORO',
     SHORT_BREAK = 'SHORT_BREAK',
     LONG_BREAK = 'LONG_BREAK',
-    pomodoros = 0,
     progressCells = document.querySelectorAll('.progress-cell'),
     currentInterval = null;
 
-var timer = {
+var pTimer = {
   mode: POMODORO,
   duration: 0,
   interval: null,
+  pomodoros: 0,
   set: function() {
     switch (this.mode) {
       case POMODORO:
@@ -38,8 +38,7 @@ var timer = {
       setTimerText(remainingMinutes, remainingSeconds);
 
       if (remainingMinutes === 0 && remainingSeconds === 60) {
-        this.stop();
-        onTimerEnd();
+        this.stop().onEnd()
       }
     }
 
@@ -49,12 +48,37 @@ var timer = {
   },
   stop: function() {
     clearInterval(this.interval);
+    this.interval = null;
     return this;
   },
   reset: function() {
     setTimerText(this.duration, 0);
     return this;
-  }
+  },
+  onEnd: function() {
+    switch (this.mode) {
+      case POMODORO:
+        // make pomodoro-end sound
+        this.pomodoros++;
+        if (this.pomodoros === 4) {
+          this.mode = LONG_BREAK;
+        } else {
+          this.mode = SHORT_BREAK;
+        }
+        break;
+      case LONG_BREAK:
+        this.pomodoros = 0;
+      case SHORT_BREAK:
+        // make break-end sound
+        this.mode = POMODORO;
+        break;
+      default:
+        break;
+    }
+
+    updateProgressBar();
+    setButtonText('start');
+  },
 };
 
 function updateProgressBar() {
@@ -62,7 +86,7 @@ function updateProgressBar() {
     cell.classList.remove('filled');
   })
 
-  for (var i = 0; i < pomodoros; i++) {
+  for (var i = 0; i < pTimer.pomodoros; i++) {
     progressCells[i].classList.add('filled');
   }
 }
@@ -89,13 +113,16 @@ function setButtonText(text) {
     .innerText = text;
 }
 
-function onTimerEnd() {
-  console.log('what up, timer ended');
-}
-
 function onButtonPress() {
-  timer.mode = SHORT_BREAK;
-  timer.set().start();
+  if (!pTimer.interval) {
+    pTimer.set().start();
+    setButtonText('reset');
+  } else {
+    pTimer.stop().reset();
+    setButtonText('start');
+  }
+
+  console.log(pTimer.mode);
 }
 
 document.getElementById('pomodoro-button')
