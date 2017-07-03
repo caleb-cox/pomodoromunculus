@@ -23,12 +23,32 @@ html, body {
   border-radius: 16px;
 }
 
+#pomodoro-progress {
+  flex-direction: row;
+  width: 192px;
+}
+
+.progress-cell {
+  background-color: #EBF2CC;
+  height: 8px;
+  width: 48px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 1px #000;
+}
+
+.progress-cell.filled {
+  background-color: #252621;
+  box-shadow: inset 0 0 1px #EBF2CC;
+}
+
 #pomodoro-timer {
-  background-color: #FFA595;
+  background-color: #EBF2CC;
+  color: #252621;
   width: 192px;
   font-size: 48px;
   font-family: monospace;
   text-align: center;
+  text-shadow: 0 0 1px #252621;
   padding: 16px;
   margin: 16px;
   border-radius: 4px;
