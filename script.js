@@ -1,6 +1,7 @@
 var POMODORO = 'POMODORO',
     SHORT_BREAK = 'SHORT_BREAK',
     LONG_BREAK = 'LONG_BREAK',
+    chime = new Audio('chime.wav'),
     progressCells = document.querySelectorAll('.progress-cell'),
     currentInterval = null;
 
@@ -58,7 +59,6 @@ var pTimer = {
   onEnd: function() {
     switch (this.mode) {
       case POMODORO:
-        // make pomodoro-end sound
         this.pomodoros++;
         if (this.pomodoros === 4) {
           this.mode = LONG_BREAK;
@@ -69,13 +69,13 @@ var pTimer = {
       case LONG_BREAK:
         this.pomodoros = 0;
       case SHORT_BREAK:
-        // make break-end sound
         this.mode = POMODORO;
         break;
       default:
         break;
     }
 
+    chime.play();
     updateProgressBar();
     updateButtonText();
   },
