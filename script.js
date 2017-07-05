@@ -38,7 +38,7 @@ var pTimer = {
 
       setTimerText(remainingMinutes, remainingSeconds);
 
-      if (remainingMinutes === 0 && remainingSeconds === 60) {
+      if (remainingMinutes <= 0 && remainingSeconds <= 60) {
         this.stop().onEnd()
       }
     }
